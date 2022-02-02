@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginView.routeName: (ctx) => LoginView(),
         RegisterView.routeName: (ctx) => RegisterView(),
-        VerifyEmailView.routeName: (ctx) => VerifyEmailView()
+        VerifyEmailView.routeName: (ctx) => VerifyEmailView(),
+        NotesView.routeName: (ctx) => NotesView()
       },
     );
   }
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
 enum MenuAction { logout }
 
 class NotesView extends StatefulWidget {
-  NotesView({Key? key}) : super(key: key);
+  static const routeName = "/notes/";
 
   @override
   State<NotesView> createState() => _NotesViewState();
