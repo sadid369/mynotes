@@ -7,6 +7,7 @@ import 'dart:developer' as devtools show log;
 
 import 'package:mynotes/main.dart';
 import 'package:mynotes/utilities/show_error_dialog.dart';
+import 'package:mynotes/views/register_view.dart';
 
 class LoginView extends StatefulWidget {
   static const routeName = "/login/";
@@ -94,7 +95,7 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    LoginView.routeName, (route) => false);
+                    RegisterView.routeName, (route) => false);
               },
               child: const Text("Not Register Yet? Register Here!"))
         ],
