@@ -8,6 +8,7 @@ import 'dart:developer' as devtools show log;
 import 'package:mynotes/main.dart';
 import 'package:mynotes/utilities/show_error_dialog.dart';
 import 'package:mynotes/views/register_view.dart';
+import 'package:mynotes/views/verify_email_view.dart';
 
 class LoginView extends StatefulWidget {
   static const routeName = "/login/";
@@ -63,10 +64,19 @@ class _LoginViewState extends State<LoginView> {
                 try {
                   await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: email, password: password);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    NotesView.routeName,
-                    (route) => false,
-                  );
+
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user?.emailVerified ?? false) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      NotesView.routeName,
+                      (route) => false,
+                    );
+                  } else {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      VerifyEmailView.routeName,
+                      (route) => false,
+                    );
+                  }
                 } on FirebaseAuthException catch (e) {
                   if (e.code == "user-not-found") {
                     await showErrorDialog(
